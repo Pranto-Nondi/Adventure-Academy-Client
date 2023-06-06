@@ -1,23 +1,24 @@
 
 
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeRoute, setActiveRoute] = useState('Home'); // Initialize the active route
+    const location = useLocation();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const handleRouteClick = (route) => {
-        setActiveRoute(route);
+    const handleRouteClick = () => {
         setIsMenuOpen(false);
     };
 
     const getLinkClassName = (route) => {
-        return `text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${activeRoute === route ? 'bg-gray-700 text-white' : ''
+        const isActiveRoute = location.pathname === route.path;
+        return `text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${isActiveRoute ? 'bg-gray-700 text-white' : ''
             }`;
     };
 
@@ -29,7 +30,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="bg-gray-800">
+        <nav className="bg-gray-700">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
                     <div className="flex items-center justify-start flex-shrink-0">
@@ -43,8 +44,8 @@ const Navbar = () => {
                                 <Link
                                     key={index}
                                     to={route.path}
-                                    className={getLinkClassName(route.name)}
-                                    onClick={() => handleRouteClick(route.name)}
+                                    className={getLinkClassName(route)}
+                                    onClick={handleRouteClick}
                                 >
                                     {route.name}
                                 </Link>
@@ -82,8 +83,8 @@ const Navbar = () => {
                                 <Link
                                     key={index}
                                     to={route.path}
-                                    className={getLinkClassName(route.name)}
-                                    onClick={() => handleRouteClick(route.name)}
+                                    className={getLinkClassName(route)}
+                                    onClick={handleRouteClick}
                                 >
                                     {route.name}
                                 </Link>
@@ -97,4 +98,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
