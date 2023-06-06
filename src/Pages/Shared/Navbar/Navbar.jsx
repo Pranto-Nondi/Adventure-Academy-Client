@@ -35,7 +35,7 @@ const Navbar = () => {
                 <div className="relative flex items-center justify-between h-16">
                     <div className="flex items-center justify-start flex-shrink-0">
                         <Link to="/" className="text-white text-xl font-bold">
-                            SummerCampPhoto
+                            CampSnapPhotoGrapy
                         </Link>
                     </div>
                     <div className="hidden sm:block sm:ml-6">
