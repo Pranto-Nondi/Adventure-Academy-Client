@@ -1,0 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
+
+const usePopularInstructors = () => {
+    const { data: instructors = [], isLoading: loading, refetch } = useQuery({
+        queryKey: ['menu'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/instructors');
+            const data = await res.json();
+
+            // Sort classes based on the number of students in descending order
+            const sortedInstructors = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
+
+            // Limit the classes to 6
+            const limitedInstructors = sortedInstructors.slice(0, 6);
+
+            return limitedInstructors;
+        }
+    });
+
+    return [instructors, loading, refetch];
+}
+
+export default usePopularInstructors;
