@@ -1,12 +1,9 @@
 
 
-
-
 import { useContext } from "react";
-
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
-import { FaUser } from "react-icons/fa";
+
 
 
 const NavBar = () => {
