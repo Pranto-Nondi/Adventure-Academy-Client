@@ -1,17 +1,23 @@
 
-
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {  FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../provider/AuthProvider';
+import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
-const RegistrationForm = () => {
+
+const SignUp = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
         watch,
+        reset
     } = useForm();
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -21,6 +27,44 @@ const RegistrationForm = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+
+                const loggedUser = result.user;
+                console.log(loggedUser);
+
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+
+                                }
+                            })
+
+                    })
+                    .catch(error => console.log(error))
+
+                    logOut()
+                    .then(() => {
+
+                        navigate(`/login`)
+
+                    })
+                    .catch(error => {
+                        setError(error.message)
+                    })
+            })
+            .catch(error => console.log(error))
     };
 
     return (
@@ -138,15 +182,12 @@ const RegistrationForm = () => {
                 </form>
                 <div className="mt-4">
                     <span className="text-gray-600">Or sign up with:</span>
-                    <div className="flex justify-center mt-2">
-                        <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Google
-                        </button>
-                    </div>
+
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
     );
 };
 
-export default RegistrationForm;
+export default SignUp;

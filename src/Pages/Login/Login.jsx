@@ -1,10 +1,11 @@
 
-
-
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../provider/AuthProvider';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const LoginForm = () => {
     const {
@@ -12,7 +13,10 @@ const LoginForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -21,6 +25,25 @@ const LoginForm = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        signIn(data.email, data.password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                Swal.fire({
+                    title: 'Login Successful.',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown',
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp',
+                    },
+                });
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                console.error(error);
+                // Handle login error
+            });
     };
 
     return (
@@ -83,11 +106,12 @@ const LoginForm = () => {
                 </form>
                 <div className="mt-4">
                     <span className="text-gray-600">Or Login with:</span>
-                    <div className="flex justify-center mt-2">
+                    {/* <div className="flex justify-center mt-2">
                         <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Google
                         </button>
-                    </div>
+                    </div> */}
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

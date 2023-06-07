@@ -1,100 +1,93 @@
 
 
 
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const location = useLocation();
+import { useContext } from "react";
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
+import { FaUser } from "react-icons/fa";
+
+
+const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
+    }
+
+    const renderDashboardLink = () => {
+        if (user) {
+            return <>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+            </>;
+        }
+        return null;
     };
 
-    const handleRouteClick = () => {
-        setIsMenuOpen(false);
-    };
 
-    const getLinkClassName = (route) => {
-        const isActiveRoute = location.pathname === route.path;
-        return `text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ${isActiveRoute ? 'bg-gray-700 text-white' : ''
-            }`;
-    };
 
-    const routes = [
-        { name: 'Home', path: '/' },
-        { name: 'Instructors', path: '/instructors' },
-        { name: 'Classes', path: '/classes' },
-        { name: 'Login', path: '/login' },
-    ];
+
+
+
+    const renderAuthOptions = () => {
+        if (user) {
+            return (
+                <li> <button onClick={handleLogOut} >LogOut</button></li>
+            );
+        } else {
+            return (
+                <li><Link to="/login">Login</Link></li>
+            );
+        }
+    }
 
     return (
-        <nav className="bg-gray-700">
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <div className="relative flex items-center justify-between h-16">
-                    <div className="flex items-center justify-start flex-shrink-0">
-                        <Link to="/" className="text-white text-xl font-bold">
-                            CampSnapPhotoGrapy
-                        </Link>
+        <>
+            <div className="navbar bg-neutral text-neutral-content">
+                <div className="navbar-start">
+                    <div className="dropdown">
+                        <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                        </label>
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/Instructors">Instructors</Link></li>
+                            <li><Link to="/Classes">Classes</Link></li>
+                            {renderDashboardLink()}
+                            {renderDashboardLink()}
+
+                            {renderAuthOptions()}
+                        </ul>
                     </div>
-                    <div className="hidden sm:block sm:ml-6">
-                        <div className="flex space-x-4">
-                            {routes.map((route, index) => (
-                                <Link
-                                    key={index}
-                                    to={route.path}
-                                    className={getLinkClassName(route)}
-                                    onClick={handleRouteClick}
-                                >
-                                    {route.name}
-                                </Link>
-                            ))}
+                    <a className="btn btn-ghost normal-case text-xl">CampSnapPhotoGrapy</a>
+                </div>
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="menu menu-horizontal px-1">
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/Instructors">Instructors</Link></li>
+                        <li><Link to="/Classes">Classes</Link></li>
+                        {renderDashboardLink()}
+
+                        {renderAuthOptions()}
+                    </ul>
+                </div>
+                <div className="navbar-end">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-12 h-12 rounded-full">
+                            <img
+                                src={user?user?.photoURL:"https://i.ibb.co/3fMBDSH/u.png"}
+                                className="w-full h-full rounded-full"
+                                alt="User Avatar"
+                            />
                         </div>
-                    </div>
-                    <div className="flex sm:hidden">
-                        <button
-                            type="button"
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                            onClick={toggleMenu}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                {isMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
+                    </label>
                 </div>
             </div>
-            {isMenuOpen && (
-                <div className="sm:hidden bg-gray-800">
-                    <div className="px-2 pt-2 pb-3">
-                        <div className="flex flex-col items-center">
-                            {routes.map((route, index) => (
-                                <Link
-                                    key={index}
-                                    to={route.path}
-                                    className={getLinkClassName(route)}
-                                    onClick={handleRouteClick}
-                                >
-                                    {route.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
-        </nav>
+        </>
     );
-};
-
-export default Navbar;
+}
+export default NavBar;
