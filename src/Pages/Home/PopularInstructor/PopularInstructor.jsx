@@ -11,7 +11,7 @@ const PopularInstructor = () => {
         <section className="p-4">
             <h2 className="text-2xl font-bold mb-4">Popular Instructors</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {instructors.map((instructor, index) => (
+                {instructors.slice(0, 6).map((instructor, index) => (
                     <div key={index} className="card w-96 bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10">
                             <img src="https://media.photographycourse.net/wp-content/uploads/2022/06/08135516/person-taking-photographs-outdoors.jpg" alt={instructor.name} className="rounded-xl" />

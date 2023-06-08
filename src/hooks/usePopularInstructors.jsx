@@ -8,12 +8,12 @@ const usePopularInstructors = () => {
             const data = await res.json();
 
             // Sort classes based on the number of students in descending order
-            const sortedInstructors = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
+            // const sortedInstructors = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
 
             // Limit the classes to 6
-            const limitedInstructors = sortedInstructors.slice(0, 6);
+            // const limitedInstructors = sortedInstructors.slice(0, 6);
 
-            return limitedInstructors;
+            return data;
         }
     });
 
