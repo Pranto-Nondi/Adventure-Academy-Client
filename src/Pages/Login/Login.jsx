@@ -3,9 +3,10 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+
 import { AuthContext } from '../../provider/AuthProvider';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import swal from 'sweetalert';
 
 const LoginForm = () => {
     const {
@@ -29,15 +30,7 @@ const LoginForm = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
-                Swal.fire({
-                    title: 'Login Successful.',
-                    showClass: {
-                        popup: 'animate__animated animate__fadeInDown',
-                    },
-                    hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp',
-                    },
-                });
+                swal("Good job!", "Login SuccessFull", "success")
                 navigate(from, { replace: true });
             })
             .catch((error) => {

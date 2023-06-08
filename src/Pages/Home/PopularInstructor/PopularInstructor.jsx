@@ -14,11 +14,11 @@ const PopularInstructor = () => {
                 {instructors.slice(0, 6).map((instructor, index) => (
                     <div key={index} className="card w-96 bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10">
-                            <img src="https://media.photographycourse.net/wp-content/uploads/2022/06/08135516/person-taking-photographs-outdoors.jpg" alt={instructor.name} className="rounded-xl" />
+                            <img src="https://media.photographycourse.net/wp-content/uploads/2022/06/08135516/person-taking-photographs-outdoors.jpg" alt={instructor.image} className="rounded-xl" />
                         </figure>
                         <div className="card-body items-center text-center">
-                            <h2 className="card-title">{instructor.name}</h2>
-                            <p>{instructor.specialty}</p>
+                            <h2 className="card-title">{instructor.instructor}</h2>
+                            <p>{instructor.description}</p>
                             <div className="card-actions">
                                 <button className="btn bg-emerald-200">View profile</button>
                             </div>
