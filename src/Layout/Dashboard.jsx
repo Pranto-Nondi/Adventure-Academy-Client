@@ -1,8 +1,9 @@
 
 import { NavLink, Outlet } from "react-router-dom";
 import { FaWallet, FaHome, FaUtensils } from 'react-icons/fa';
-import useAdmin from "../hooks/UseAdmin";
+
 import useInstructor from "../hooks/useInstructor";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
