@@ -11,9 +11,9 @@ const usePopularClass = () => {
             const sortedClasses = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
 
             // Limit the classes to 6
-            const limitedClasses = sortedClasses.slice(0, 6);
+            // const limitedClasses = sortedClasses.slice(0, 6);
 
-            return limitedClasses;
+            return sortedClasses;
         }
     });
 

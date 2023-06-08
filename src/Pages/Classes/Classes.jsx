@@ -3,16 +3,17 @@ import useAuth from '../../hooks/useAuth';
 import usePopularInstructors from '../../hooks/usePopularInstructors';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import usePopularClass from '../../hooks/usePopularClass';
 
 
 const Instructors = () => {
-    const [instructors] = usePopularInstructors();
+    const [classes] = usePopularClass();
     const { user } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const handleSelectCourse = (course) => {
         if (!user) {
-            
+
             Swal.fire({
                 title: 'Please Login',
                 text: "After SuccessFully Login You have to access",
@@ -24,7 +25,7 @@ const Instructors = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/login', { state: { from: location }, replace: true });
-                   
+
                 }
             })
 
@@ -48,19 +49,23 @@ const Instructors = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {instructors.slice(0, 6).map((singleInstructor, index) => (
-                        <tr key={singleInstructor._id} >
+                    {classes.map((classe, index) => (
+                        <tr key={classe._id}>
                             <th>{index + 1}</th>
-                            <td>{singleInstructor.name}</td>
-                            <td>Not Avalaible</td>
-                            <td>{singleInstructor.instructor}</td>
-                            <td>{singleInstructor.availableSeats}</td>
-                            <td>{singleInstructor.price}</td>
-
-                            <td><button className='btn ' onClick={() => handleSelectCourse(singleInstructor)} >select</button></td>
+                            <td>{classe.name}</td>
+                            <td>Not Available</td>
+                            <td>{classe.instructor}</td>
+                            <td>{classe.availableSeats}</td>
+                            <td>{classe.price}</td>
+                            <td>
+                                <button className="btn" onClick={() => handleSelectCourse(classe)}>
+                                    Select
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
+
 
 
             </table>

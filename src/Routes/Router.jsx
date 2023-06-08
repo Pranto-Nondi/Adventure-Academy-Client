@@ -6,6 +6,13 @@ import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Instructors from "../Pages/Instructors/Instructors";
 import Classes from "../Pages/Classes/Classes"
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import StudentHome from "../Pages/Dashboard/StudentHome/StudentHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import InstructorHome from "../Pages/Dashboard/InstructorHome/InstructorHome";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
 const router = createBrowserRouter([
@@ -31,15 +38,57 @@ const router = createBrowserRouter([
                 path: 'instructors',
                 element: <Instructors />
             },
-           {
-            path:'classes',
-            element:<Classes/>
-           }
+            {
+                path: 'classes',
+                element: <Classes />
+            }
 
 
 
         ]
     },
+    {
+        path: "dashboard",
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        children: [
+            {
+                path: 'studentHome',
+                element: <StudentHome />
+            },
+            // {
+            //     path: "mycart",
+            //     element: <MyCart />,
+            // },
+            // {
+            //     path: 'payment',
+            //     element: <Payment />
+            // },
+            // // admin routes
+
+            {
+                path: 'instructorHome',
+                element: <InstructorRoute><InstructorHome /></InstructorRoute>
+            },
+            {
+                path: 'adminhome',
+                element: <AdminRoute><AdminHome /></AdminRoute>
+            },
+            // {
+            //     path: 'allusers',
+            //     element: <AdminRoute><AllUsers /></AdminRoute>
+            // },
+            // {
+            //     path: 'addItem',
+            //     element: <AdminRoute><AddItem /></AdminRoute>
+            // },
+            // {
+            //     path: 'manageitems',
+            //     element: <AdminRoute><ManageItems /></AdminRoute>
+            // }
+
+
+        ]
+    }
 
 ]);
 export default router
