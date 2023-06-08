@@ -13,6 +13,7 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import InstructorHome from "../Pages/Dashboard/InstructorHome/InstructorHome";
 import AdminRoute from "./AdminRoute";
 import InstructorRoute from "./InstructorRoute";
+import AddClass from "../Pages/Dashboard/AddClass/AddClass";
 
 
 const router = createBrowserRouter([
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: 'instructorHome',
                 element: <InstructorRoute><InstructorHome /></InstructorRoute>
+            },
+            {
+                path: 'addClass',
+                element: <AddClass />
             },
             {
                 path: 'adminhome',
