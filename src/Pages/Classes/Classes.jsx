@@ -1,25 +1,47 @@
 
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import usePopularClass from '../../hooks/usePopularClass';
+import useAdmin from '../../hooks/useAdmin';
+import useInstructor from '../../hooks/useInstructor';
 
-
-const Instructors = () => {
-
+const Classes = () => {
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
     const { user, loading } = useAuth();
-  
-    const [classes] = usePopularClass();
+
+    const [classes, , refetch] = usePopularClass();
 
     const location = useLocation();
     const navigate = useNavigate();
+    const [disabledBtns, setDisabledBtns] = useState([]);
+
+    useEffect(() => {
+        fetchDisabledButtons();
+    }, []);
+
+    const fetchDisabledButtons = () => {
+        fetch('http://localhost:5000/disabledButtons')
+            .then((res) => res.json())
+            .then((data) => {
+                const disabledButtons = data.map((item) => item._id);
+                setDisabledBtns(disabledButtons);
+            })
+            .catch((error) => {
+                console.error('Error retrieving disabled buttons:', error);
+            });
+    };
 
     const handleSelectCourse = (classe) => {
+        const { name, image, price, instructor, _id, description } = classe;
+
         if (!user) {
             Swal.fire({
                 title: 'Please Login',
-                text: 'After SuccessFully Login You have to access',
+                text: 'After Successfully Login You will have access',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -30,15 +52,61 @@ const Instructors = () => {
                     navigate('/login', { state: { from: location }, replace: true });
                 }
             });
-            return; // Stop further execution if the user is not logged in
-        }
+            return;
+        } else if (user && user.email) {
+            const classeData = { classId: _id, name, image, price, instructor, description };
 
-        // Handle course selection logic here
+            fetch('http://localhost:5000/classes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(classeData),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        setDisabledBtns([...disabledBtns, _id]);
+                        refetch();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Class is Selected.',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error selecting class:', error);
+                });
+
+            fetch('http://localhost:5000/disabledButtons', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ _id }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        setDisabledBtns([...disabledBtns, _id]);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error disabling button:', error);
+                });
+        }
+    };
+
+    const isButtonDisabled = (classId) => {
+        return disabledBtns.includes(classId);
     };
 
     return (
         <div className="overflow-x-auto pt-5 pb-10">
-            <h1 className='text-center pb-5'>ALL Approved Classes</h1>
+            <h1 className="text-center pb-5">ALL Approved Classes</h1>
 
             <table className="table table-xs">
                 <thead>
@@ -65,7 +133,7 @@ const Instructors = () => {
                                 <button
                                     className="btn bg-emerald-100"
                                     onClick={() => handleSelectCourse(classe)}
-                                    disabled={classe.availableSeats === 0 || user}
+                                    disabled={classe.availableSeats === 0 || isAdmin || isInstructor || isButtonDisabled(classe._id)}
                                 >
                                     Select
                                 </button>
@@ -74,9 +142,12 @@ const Instructors = () => {
                     ))}
                 </tbody>
             </table>
-
         </div>
     );
 };
 
-export default Instructors;
+export default Classes;
+
+
+
+
