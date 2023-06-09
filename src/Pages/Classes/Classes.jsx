@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -39,7 +38,8 @@ const Classes = () => {
     }, []);
 
     const handleSelectCourse = (classe) => {
-        const { name, image, price, instructor, _id, description } = classe;
+        console.log(classe)
+        const { name, image, price, instructor, _id,availableSeats, description } = classe;
 
         if (!user) {
             Swal.fire({
@@ -57,7 +57,7 @@ const Classes = () => {
             });
             return;
         } else if (user && user.email) {
-            const classeData = { classId: _id, name, image, price, instructor, description };
+            const classeData = { classId: _id, name, image, price, instructor, availableSeats, description };
 
             fetch('http://localhost:5000/classes', {
                 method: 'POST',
