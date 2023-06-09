@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import usePopularClass from '../../hooks/usePopularClass';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
+import { RotatingLines } from 'react-loader-spinner';
 
 const Classes = () => {
     const [isAdmin] = useAdmin();
@@ -18,22 +19,24 @@ const Classes = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [disabledBtns, setDisabledBtns] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetchDisabledButtons();
-    }, []);
-
-    const fetchDisabledButtons = () => {
         fetch('http://localhost:5000/disabledButtons')
             .then((res) => res.json())
             .then((data) => {
                 const disabledButtons = data.map((item) => item._id);
                 setDisabledBtns(disabledButtons);
+                setIsLoading(false);
+
             })
             .catch((error) => {
                 console.error('Error retrieving disabled buttons:', error);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
-    };
+    }, []);
 
     const handleSelectCourse = (classe) => {
         const { name, image, price, instructor, _id, description } = classe;
@@ -103,6 +106,20 @@ const Classes = () => {
     const isButtonDisabled = (classId) => {
         return disabledBtns.includes(classId) && user && user.email;
     };
+
+    if (isLoading) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+                <RotatingLines
+                    strokeColor="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="96"
+                    visible={true}
+                />
+            </div>
+        );
+    }
 
     return (
         <div className="overflow-x-auto pt-5 pb-10">
