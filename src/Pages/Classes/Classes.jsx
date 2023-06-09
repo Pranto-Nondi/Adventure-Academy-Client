@@ -101,7 +101,7 @@ const Classes = () => {
     };
 
     const isButtonDisabled = (classId) => {
-        return disabledBtns.includes(classId);
+        return disabledBtns.includes(classId) && user && user.email;
     };
 
     return (
@@ -147,7 +147,3 @@ const Classes = () => {
 };
 
 export default Classes;
-
-
-
-
