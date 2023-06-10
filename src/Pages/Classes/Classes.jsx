@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -12,34 +13,58 @@ const Classes = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const { user, loading } = useAuth();
-
     const [classes, , refetch] = usePopularClass();
-
     const location = useLocation();
     const navigate = useNavigate();
     const [disabledBtns, setDisabledBtns] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/disabledButtons')
-            .then((res) => res.json())
-            .then((data) => {
-                const disabledButtons = data.map((item) => item._id);
-                setDisabledBtns(disabledButtons);
-                setIsLoading(false);
+        fetchDisabledButtons();
 
-            })
-            .catch((error) => {
-                console.error('Error retrieving disabled buttons:', error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        if (user && user.email) {
+            fetchUserClasses(user.email);
+        }
     }, []);
 
-    const handleSelectCourse = (classe) => {
-        console.log(classe)
-        const { name, image, price, instructor, _id,availableSeats, description } = classe;
+    const fetchDisabledButtons = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/disabledButtons');
+            const data = await response.json();
+
+            if (Array.isArray(data)) {
+                const disabledButtons = data.map((item) => item.classId);
+                setDisabledBtns(disabledButtons);
+            } else {
+                console.error('Invalid response format:', data);
+            }
+        } catch (error) {
+            console.error('Error retrieving disabled buttons:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const fetchUserClasses = async (email) => {
+        console.log(email)
+        try {
+            const response = await fetch(`http://localhost:5000/userClasses?email=${email}`);
+            const data = await response.json();
+            console.log(data)
+            if (Array.isArray(data)) {
+                const userClasses = data.map((item) => item.classId);
+                setDisabledBtns(userClasses);
+            } else {
+                console.error('Invalid response format:', data);
+            }
+        } catch (error) {
+            console.error('Error retrieving user classes:', error);
+        }
+    };
+
+    const handleSelectCourse = async (classe) => {
+        console.log(classe);
+        const { name, image, price, instructor, _id, availableSeats, description } = classe;
 
         if (!user) {
             Swal.fire({
@@ -56,50 +81,62 @@ const Classes = () => {
                 }
             });
             return;
-        } else if (user && user.email) {
-            const classeData = { classId: _id, name, image, price, instructor, availableSeats, description };
+        }
 
-            fetch('http://localhost:5000/classes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(classeData),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data.success) {
-                        setDisabledBtns([...disabledBtns, _id]);
-                        refetch();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Class is Selected.',
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error selecting class:', error);
-                });
+        if (user && user.email) {
+            try {
+                const classeData = {
+                    classId: _id,
+                    name,
+                    image,
+                    price,
+                    instructor,
+                    availableSeats,
+                    description,
+                    email: user.email,
+                };
 
-            fetch('http://localhost:5000/disabledButtons', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ _id }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data.success) {
-                        setDisabledBtns([...disabledBtns, _id]);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error disabling button:', error);
+                const response = await fetch('http://localhost:5000/classes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(classeData),
                 });
+                const data = await response.json();
+
+                if (data.success) {
+                    setDisabledBtns([...disabledBtns, _id]);
+                    refetch();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class is Selected.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    fetchUserClasses(user.email); // Fetch user classes again after selecting a class
+                }
+            } catch (error) {
+                console.error('Error selecting class:', error);
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/disabledButtons', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ classId: _id, email: user.email }),
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    setDisabledBtns([...disabledBtns, _id]);
+                }
+            } catch (error) {
+                console.error('Error disabling button:', error);
+            }
         }
     };
 
@@ -110,13 +147,7 @@ const Classes = () => {
     if (isLoading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-                <RotatingLines
-                    strokeColor="grey"
-                    strokeWidth="5"
-                    animationDuration="0.75"
-                    width="96"
-                    visible={true}
-                />
+                <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="96" visible={true} />
             </div>
         );
     }
@@ -164,3 +195,8 @@ const Classes = () => {
 };
 
 export default Classes;
+
+
+
+
+

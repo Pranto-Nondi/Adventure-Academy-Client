@@ -11,9 +11,12 @@ import Dashboard from "../Layout/Dashboard";
 import StudentHome from "../Pages/Dashboard/StudentHome/StudentHome";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import InstructorHome from "../Pages/Dashboard/InstructorHome/InstructorHome";
+import instructorRoute from "./InstructorRoute"
 import AdminRoute from "./AdminRoute";
-import InstructorRoute from "./InstructorRoute";
+
 import AddClass from "../Pages/Dashboard/AddClass/AddClass";
+import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
+import InstructorRoute from "./InstructorRoute";
 
 
 const router = createBrowserRouter([
@@ -44,8 +47,6 @@ const router = createBrowserRouter([
                 element: <Classes />
             }
 
-
-
         ]
     },
     {
@@ -56,15 +57,7 @@ const router = createBrowserRouter([
                 path: 'studentHome',
                 element: <StudentHome />
             },
-            // {
-            //     path: "mycart",
-            //     element: <MyCart />,
-            // },
-            // {
-            //     path: 'payment',
-            //     element: <Payment />
-            // },
-            // // admin routes
+
 
             {
                 path: 'instructorHome',
@@ -72,24 +65,16 @@ const router = createBrowserRouter([
             },
             {
                 path: 'addClass',
-                element: <AddClass />
+                element: <InstructorRoute><AddClass /></InstructorRoute>
             },
             {
                 path: 'adminhome',
                 element: <AdminRoute><AdminHome /></AdminRoute>
             },
-            // {
-            //     path: 'allusers',
-            //     element: <AdminRoute><AllUsers /></AdminRoute>
-            // },
-            // {
-            //     path: 'addItem',
-            //     element: <AdminRoute><AddItem /></AdminRoute>
-            // },
-            // {
-            //     path: 'manageitems',
-            //     element: <AdminRoute><ManageItems /></AdminRoute>
-            // }
+            {
+                path: 'manageClasses',
+                element: <AdminRoute><ManageClasses /></AdminRoute>
+            }
 
 
         ]
