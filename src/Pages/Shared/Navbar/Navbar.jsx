@@ -1,6 +1,6 @@
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import swal from "sweetalert";
 import useInstructor from "../../../hooks/useInstructor";
@@ -10,11 +10,12 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
-
+    const navigate = useNavigate()
     const handleLogOut = () => {
         logOut()
             .then(() => {
                 swal('Good job!', 'LogOut Successful', 'success');
+                navigate('/')
             })
             .catch(error => console.log(error));
     }
