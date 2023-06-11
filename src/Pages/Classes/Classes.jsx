@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import usePopularClass from '../../hooks/usePopularClass';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
+import useSelectedClasses from '../../hooks/useSelectedClasses';
 
 
 const Classes = () => {
@@ -16,29 +17,30 @@ const Classes = () => {
     const [allClasses, , refetch] = usePopularClass();
     const location = useLocation();
     const navigate = useNavigate();
-
+    const [selectedClasses] = useSelectedClasses()
     const [isLoading, setIsLoading] = useState(true);
-    const [selectedClasses, setSelectedClasses] = useState([]);
+    // const [selectedClasses, setSelectedClasses] = useState([]);
+   
     const classes = allClasses.filter((classe) => classe.status === 'approved');
 
-    useEffect(() => {
-        if (user && user.email) {
-            fetchSelectedClasses(user.email);
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     if (user && user.email) {
+    //         fetchSelectedClasses(user.email);
+    //     }
+    // }, [user]);
 
-    const fetchSelectedClasses = (email) => {
-        fetch(`http://localhost:5000/selectedClasses?email=${email}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success) {
-                    setSelectedClasses(data.data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error occurred while fetching selected classes:', error);
-            });
-    };
+    // const fetchSelectedClasses = (email) => {
+    //     fetch(`http://localhost:5000/selectedClasses?email=${email}`)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             if (data.success) {
+    //                 setSelectedClasses(data.data);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error occurred while fetching selected classes:', error);
+    //         });
+    // };
 
     const handleSelectCourse = (classe) => {
         const { _id, className, imgURL, instructorName, instructorEmail, availableSeats, price, status } = classe;
@@ -74,7 +76,7 @@ const Classes = () => {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        fetchSelectedClasses(user.email); // fetch updated selected classes for the user
+                        // fetchSelectedClasses(user.email); // fetch updated selected classes for the user
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -108,7 +110,7 @@ const Classes = () => {
     };
 
     const isClassSelected = (classe) => {
-        return selectedClasses.some((selectedClass) => selectedClass.classId === classe._id);
+        return selectedClasses?.some((selectedClass) => selectedClass.classId === classe._id);
     };
 
     return (
@@ -119,7 +121,7 @@ const Classes = () => {
                     {classes.map((classe, index) => (
                         <div key={index} className="card w-96 bg-base-100 shadow-xl">
                             <figure className="px-10 pt-10">
-                                <img src={classe.imgURL} alt={classe.imgURL} className="rounded-xl" />
+                                <img src={classe?.imgURL} alt={classe.imgURL} className="rounded-xl" />
                             </figure>
                             <div className="card-body items-start text-center">
                                 <h2 className="card-title">Name: {classe.className}</h2>
