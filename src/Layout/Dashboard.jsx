@@ -24,8 +24,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/adminHome"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                           
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaHome />
                                             <span className="font-bold">Admin Home</span>
@@ -34,8 +34,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/manageClasses"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                        
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaUtensils />
                                             <span className="font-bold">Manage Classes</span>
@@ -44,8 +44,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/manageUsers"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                          
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaWallet />
                                             <span className="font-bold">Manage Users</span>
@@ -58,8 +58,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/instructorHome"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                         
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaHome />
                                             <span className="font-bold">Instructor Home</span>
@@ -68,8 +68,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/addClass"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                          
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaUtensils />
                                             <span className="font-bold">Add Class</span>
@@ -78,8 +78,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/myClasses"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                        
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaWallet />
                                             <span className="font-bold">My Classes</span>
@@ -92,8 +92,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/studentHome"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                           
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaHome />
                                             <span className="font-bold">Student Home</span>
@@ -102,8 +102,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/selectedClasses"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                           
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaUtensils />
                                             <span className="font-bold">Selected Classes</span>
@@ -112,8 +112,8 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/enrolledClasses"
-                                            activeClassName="text-blue-500"
-                                            className="flex items-center space-x-2"
+                                         
+                                            className="flex items-center space-x-2 text-blue-500"
                                         >
                                             <FaWallet />
                                             <span className="font-bold">Enrolled Classes</span>
@@ -124,9 +124,9 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     to="/"
-                                    exact
-                                    activeClassName="text-blue-500"
-                                    className="flex items-center space-x-2"
+                                    
+                                  
+                                    className="flex items-center space-x-2 text-blue-500"
                                 >
                                     <FaHome />
                                     <span className="font-bold">Home</span>
