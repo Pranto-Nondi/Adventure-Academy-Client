@@ -14,10 +14,10 @@ const Classes = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const { user } = useAuth();
-    const [allClasses, , refetch] = usePopularClass();
+    const [allClasses, , ] = usePopularClass();
     const location = useLocation();
     const navigate = useNavigate();
-    const [selectedClasses] = useSelectedClasses()
+    const [selectedClasses,refetch] = useSelectedClasses()
     const [isLoading, setIsLoading] = useState(true);
     // const [selectedClasses, setSelectedClasses] = useState([]);
    
@@ -76,6 +76,7 @@ const Classes = () => {
                             showConfirmButton: false,
                             timer: 1500,
                         });
+                        refetch()
                         // fetchSelectedClasses(user.email); // fetch updated selected classes for the user
                     } else {
                         Swal.fire({
@@ -124,7 +125,7 @@ const Classes = () => {
                                 <img src={classe?.imgURL} alt={classe.imgURL} className="rounded-xl" />
                             </figure>
                             <div className="card-body items-start text-center">
-                                <h2 className="card-title">Name: {classe.className}</h2>
+                                <h2 className="card-title">Class Name: {classe.className}</h2>
                                 <p className="card-title text-xl">Instructor name: {classe.instructorName}</p>
                                 <p className="card-title text-lg">Available seats: {classe.availableSeats}</p>
                                 <p className="card-title text-md">Price: {classe.price}$</p>
