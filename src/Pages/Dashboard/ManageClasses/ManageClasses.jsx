@@ -1,6 +1,4 @@
 
-
-
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import usePopularClass from '../../../hooks/usePopularClass';
