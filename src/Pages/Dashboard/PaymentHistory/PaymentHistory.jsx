@@ -1,11 +1,205 @@
-import React from 'react';
+// import React, { useEffect, useState } from 'react';
+// import useAuth from '../../../hooks/useAuth';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
+
+// const PaymentHistory = () => {
+//     const { user } = useAuth();
+//     const [axiosSecure] = useAxiosSecure();
+//     const [paymentHistory, setPaymentHistory] = useState([]);
+
+//     useEffect(() => {
+//         const fetchPaymentHistory = async () => {
+//             try {
+//                 const response = await axiosSecure.get('/api/payment/history', {
+//                     params: { email: user.email },
+//                 });
+//                 setPaymentHistory(response.data);
+//             } catch (error) {
+//                 console.error('Error fetching payment history:', error);
+//                 // Handle error and show appropriate message to the user
+//             }
+//         };
+
+//         fetchPaymentHistory();
+//     }, [axiosSecure, user.email]);
+
+//     return (
+//         <>
+//             <div>
+//                 <div className="overflow-x-auto pt-5">
+//                     <table className="table">
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th>Class Name</th>
+//                                 <th>Paid Price</th>
+//                                 <th>Date</th>
+//                                 <th>Transaction Details</th>
+//                                 {/* Add more table headers as per your data */}
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             {paymentHistory.map((payment, index) => (
+//                                 <tr key={payment._id}>
+//                                     <td>{index + 1}</td>
+//                                     <td>{payment.itemName}</td>
+//                                     <td>{payment.price}</td>
+//                                     <td>{payment.date}</td>
+//                                     <td>{payment.transactionId}</td>
+//                                     {/* Render other payment fields */}
+//                                 </tr>
+//                             ))}
+//                         </tbody>
+//                     </table>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };
+
+// export default PaymentHistory;
+
+
+// import React, { useEffect, useState } from 'react';
+// import useAuth from '../../../hooks/useAuth';
+// import useAxiosSecure from '../../../hooks/useAxiosSecure';
+
+// const PaymentHistory = () => {
+//     const { user } = useAuth();
+//     const [axiosSecure] = useAxiosSecure();
+//     const [paymentHistory, setPaymentHistory] = useState([]);
+
+//     useEffect(() => {
+//         const fetchPaymentHistory = async () => {
+//             try {
+//                 const response = await axiosSecure.get('/api/payment/history', {
+//                     params: { email: user.email },
+//                 });
+//                 setPaymentHistory(response.data);
+//             } catch (error) {
+//                 console.error('Error fetching payment history:', error);
+//                 // Handle error and show appropriate message to the user
+//             }
+//         };
+
+//         fetchPaymentHistory();
+//     }, [axiosSecure, user.email]);
+
+//     const formatDate = (dateString) => {
+//         const date = new Date(dateString);
+//         return date.toLocaleString(); // Adjust the format as per your requirements
+//     };
+
+//     return (
+//         <>
+//             <div>
+//                 <div className="overflow-x-auto pt-5">
+//                     <table className="table">
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th>Class Name</th>
+//                                 <th>Paid Price</th>
+//                                 <th>Date</th>
+//                                 <th>Transaction Details</th>
+//                                 {/* Add more table headers as per your data */}
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             {paymentHistory.map((payment, index) => (
+//                                 <tr key={payment._id}>
+//                                     <td>{index + 1}</td>
+//                                     <td>{payment.itemName}</td>
+//                                     <td>{payment.price}</td>
+//                                     <td>{formatDate(payment.date)}</td>
+//                                     <td>{payment.transactionId}</td>
+//                                     {/* Render other payment fields */}
+//                                 </tr>
+//                             ))}
+//                         </tbody>
+//                     </table>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };
+
+// export default PaymentHistory;
+
+
+import React, { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const PaymentHistory = () => {
+    const { user } = useAuth();
+    const [axiosSecure] = useAxiosSecure();
+    const [paymentHistory, setPaymentHistory] = useState([]);
+
+    useEffect(() => {
+        const fetchPaymentHistory = async () => {
+            try {
+                const response = await axiosSecure.get('/api/payment/history', {
+                    params: { email: user.email },
+                });
+                setPaymentHistory(response.data);
+            } catch (error) {
+                console.error('Error fetching payment history:', error);
+                // Handle error and show appropriate message to the user
+            }
+        };
+
+        fetchPaymentHistory();
+    }, [axiosSecure, user.email]);
+
+    // Helper function to format the date
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+        };
+        return date.toLocaleString('en-US', options);
+    };
+
     return (
-        <div>
-            this is payment history
-        </div>
+        <>
+            <div>
+                <div className="overflow-x-auto pt-5">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th className='text-end'>Paid Amount</th>
+                                <th>Class Name</th>
+                                <th>Transaction Info</th>
+                                {/* Add more table headers as per your data */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {paymentHistory.map((payment, index) => (
+                                <tr key={payment._id}>
+                                    <td>{index + 1}</td>
+                                    <td>{formatDate(payment.date)}</td>
+                                    <td className='text-end'>{payment.price}</td>
+                                    <td>{payment.itemName}</td>
+                                    <td>{payment.transactionId}</td>
+                                    {/* Render other payment fields */}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
     );
 };
 
 export default PaymentHistory;
+

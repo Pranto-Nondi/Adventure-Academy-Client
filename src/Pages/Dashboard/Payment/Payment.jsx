@@ -42,7 +42,7 @@ const Payment = () => {
     return (
         <div>
 
-            {/* <h2 className="text-3xl text-center pt-10 pb-5">Payment</h2> */}
+          
             <Elements stripe={stripePromise}>
                 <CheckOutForm selectClass={selectClass}></CheckOutForm>
             </Elements>

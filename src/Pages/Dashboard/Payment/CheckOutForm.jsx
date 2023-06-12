@@ -3,8 +3,9 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CheckOutForm = ({ selectClass }) => {
     const { price } = selectClass || [];
@@ -31,86 +32,7 @@ const CheckOutForm = ({ selectClass }) => {
         }
     }, [price]);
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
 
-    //     if (!stripe || !elements) {
-    //         return;
-    //     }
-
-    //     const card = elements.getElement(CardElement);
-    //     if (card === null) {
-    //         return;
-    //     }
-
-    //     setProcessing(true);
-
-    //     try {
-    //         const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //             type: 'card',
-    //             card,
-    //         });
-
-    //         if (error) {
-    //             console.log('Stripe createPaymentMethod error:', error);
-    //             setCardError(error.message);
-    //             setProcessing(false);
-    //             return;
-    //         }
-
-    //         setCardError('');
-
-    //         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
-    //             clientSecret,
-    //             {
-    //                 payment_method: {
-    //                     card: card,
-    //                     billing_details: {
-    //                         email: user?.email || 'unknown',
-    //                         name: user?.displayName || 'anonymous'
-    //                     },
-    //                 },
-    //             },
-    //         );
-
-    //         if (confirmError) {
-    //             console.log('Stripe confirmCardPayment error:', confirmError);
-    //             setProcessing(false);
-    //             return;
-    //         }
-
-    //         setProcessing(false);
-
-    //         if (paymentIntent.status === 'succeeded') {
-    //             setTransactionId(paymentIntent.id);
-    //             // Save payment information to the server
-    //             const payment = {
-    //                 email: user?.email,
-    //                 transactionId: paymentIntent.id,
-    //                 price,
-    //                 date: new Date(),
-    //                 selectClassItem: selectClass._id,
-    //                 classItem: selectClass.classId,
-    //                 status: 'service pending',
-    //                 itemName: selectClass.className,
-    //             };
-
-    //             axiosSecure.post('/payments', payment)
-    //                 .then(res => {
-    //                     console.log(res.data);
-    //                     if (res.data.result.insertedId) {
-    //                         // Display confirmation to the user
-    //                     }
-    //                 })
-    //                 .catch(error => {
-    //                     console.log('Error saving payment information:', error);
-    //                 });
-    //         }
-    //     } catch (error) {
-    //         console.log('Stripe payment error:', error);
-    //         setProcessing(false);
-    //     }
-    // };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -172,23 +94,33 @@ const CheckOutForm = ({ selectClass }) => {
                 status: 'service pending',
                 itemName: selectClass.className,
             }
-            // axiosSecure.post(`/payments/${selectClass._id}`, payment, {
-            //     headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            // })
+
+            
             axiosSecure.post(`/payments/${selectClass._id}`, payment)
                 .then(res => {
-                    navigate('/dashboard/paymentHistory')
-                    console.log(res.data);
+                    navigate('/dashboard/paymentHistory');
+
                     if (res.data.insertResult.insertedId) {
-                        // display confirm
+                        // Send a request to update the class availableSeats
+                        axios.put(`http://localhost:5000/classes/${selectClass.classId}`)
+                            .then(res => {
+                                console.log(res.data); // Updated class data from the server
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
                     }
                 })
+                .catch(error => {
+                    console.error(error);
+                });
+
+
+
         }
 
 
     }
-
-
 
     return (
         <>

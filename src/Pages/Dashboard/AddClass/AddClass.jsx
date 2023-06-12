@@ -25,8 +25,8 @@ const AddClass = () => {
             imgURL: data.imgURL, // Use the imgURL field from the form data
             instructorName: user.displayName,
             instructorEmail: user.email,
-            availableSeats,
-            price,
+            availableSeats: parseFloat(availableSeats),
+            price: parseFloat(price),
             status: "pending"
         };
 
