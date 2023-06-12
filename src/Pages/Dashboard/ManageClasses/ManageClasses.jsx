@@ -80,16 +80,16 @@ const ManageClasses = () => {
                                 </td>
                                 <td>
                                     {classItem?.status === 'pending' && (
-                                        <button className='btn btn-xs bg-green-300' onClick={() => handleApprove(classItem._id)}>Approve</button>
+                                        <button className='btn btn-xs btn-info' onClick={() => handleApprove(classItem._id)}>Approve</button>
                                     )}
                                 </td>
                                 <td>
                                     {classItem?.status === 'pending' && (
-                                        <button className='btn btn-xs bg-red-300' onClick={() => handleDeny(classItem._id)}>Deny</button>
+                                        <button className='btn btn-xs btn-warning' onClick={() => handleDeny(classItem._id)}>Deny</button>
                                     )}
                                 </td>
                                 <td>
-                                    <button className="btn btn-info btn-xs">FeedBack</button>
+                                    <button className="btn btn-primary btn-xs">FeedBack</button>
                                 </td>
                             </tr>
                         ))}

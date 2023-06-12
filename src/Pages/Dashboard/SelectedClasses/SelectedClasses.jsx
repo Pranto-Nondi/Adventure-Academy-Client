@@ -5,9 +5,10 @@ import { RotatingLines } from 'react-loader-spinner';
 import Swal from 'sweetalert2';
 import useSelectedClasses from '../../../hooks/useSelectedClasses';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const SelectedClasses = () => {
-    const { user, loading } = useAuth();
+    const { user, loading, setSelectClass } = useAuth();
     // const [selectedClasses, setSelectedClasses] = useState([]);
     const [selectedClasses, refetch] = useSelectedClasses()
     const [axiosSecure] = useAxiosSecure();
@@ -128,7 +129,8 @@ const SelectedClasses = () => {
                                     <td>{selectClass.className}</td>
                                     <td>{selectClass.price}</td>
                                     <td>
-                                        <button className="btn btn-success btn-sm">Buy</button>
+                                        <Link to={`/dashboard/payment?id=${selectClass._id}`}><button className="btn btn-success btn-sm">Buy</button></Link>
+
                                     </td>
                                     <td>
                                         <button onClick={() => handleDelete(selectClass)} className="btn btn-error btn-sm">Delete</button>
