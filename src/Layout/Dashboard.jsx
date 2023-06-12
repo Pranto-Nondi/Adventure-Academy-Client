@@ -24,7 +24,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/adminHome"
-                                           
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaHome />
@@ -34,7 +34,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/manageClasses"
-                                        
+
                                             className="flex items-center space-x-2"
                                         >
                                             <FaUtensils />
@@ -44,7 +44,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/manageUsers"
-                                          
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaWallet />
@@ -58,7 +58,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/instructorHome"
-                                         
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaHome />
@@ -68,7 +68,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/addClass"
-                                          
+
                                             className="flex items-center space-x-2"
                                         >
                                             <FaUtensils />
@@ -78,7 +78,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/myClasses"
-                                        
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaWallet />
@@ -92,7 +92,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/studentHome"
-                                           
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaHome />
@@ -102,7 +102,7 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/selectedClasses"
-                                           
+
                                             className="flex items-center space-x-2"
                                         >
                                             <FaUtensils />
@@ -112,11 +112,21 @@ const Dashboard = () => {
                                     <li>
                                         <NavLink
                                             to="/dashboard/enrolledClasses"
-                                         
+
                                             className="flex items-center space-x-2 "
                                         >
                                             <FaWallet />
                                             <span className="font-bold">Enrolled Classes</span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/dashboard/paymentHistory"
+
+                                            className="flex items-center space-x-2 "
+                                        >
+                                            <FaWallet />
+                                            <span className="font-bold">Payment History</span>
                                         </NavLink>
                                     </li>
                                 </>
@@ -124,8 +134,8 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     to="/"
-                                    
-                                  
+
+
                                     className="flex items-center space-x-2 "
                                 >
                                     <FaHome />
@@ -140,7 +150,7 @@ const Dashboard = () => {
 
                 </div>
             </div>
-          
+
             <Footer />
         </>
     );

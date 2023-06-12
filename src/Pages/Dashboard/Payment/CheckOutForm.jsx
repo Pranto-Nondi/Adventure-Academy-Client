@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = ({ selectClass }) => {
     const { price } = selectClass || [];
@@ -16,6 +17,7 @@ const CheckOutForm = ({ selectClass }) => {
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (price > 0) {
@@ -174,6 +176,7 @@ const CheckOutForm = ({ selectClass }) => {
                 headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
             })
                 .then(res => {
+                    navigate('/dashboard/paymentHistory')
                     console.log(res.data);
                     // if (res.data.result.insertedId) {
                     //     // display confirm
