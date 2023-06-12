@@ -150,7 +150,7 @@ const Dashboard = () => {
 
                 </div>
             </div>
-
+            <br />
             <Footer />
         </>
     );
