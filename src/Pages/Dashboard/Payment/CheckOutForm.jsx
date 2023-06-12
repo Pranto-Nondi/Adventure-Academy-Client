@@ -188,7 +188,14 @@ const CheckOutForm = ({ selectClass }) => {
 
     return (
         <>
-            <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+
+            <form className="w-[70%] m-8" onSubmit={handleSubmit}>
+                <div className="flex gap-10 justify-between p-10 ">
+
+                    <h2 className="text-3xl ">Payment</h2>
+                    <h2 className="text-2xl ">Price: {price}$</h2>
+                </div>
+
                 <CardElement
                     options={{
                         style: {
@@ -205,13 +212,17 @@ const CheckOutForm = ({ selectClass }) => {
                         },
                     }}
                 />
-                <button className="btn btn-primary btn-sm mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn btn-success btn-sm mt-4" type="submit" disabled={!stripe || !clientSecret || processing}>
                     {processing ? 'Processing...' : 'Pay'}
                 </button>
             </form>
             {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-            {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
+            {transactionId && <p className="text-green-500 ml-10">Transaction complete with transactionId: {transactionId}</p>}
+
+
+
         </>
+
     );
 };
 
