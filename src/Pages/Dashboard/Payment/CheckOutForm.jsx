@@ -172,15 +172,16 @@ const CheckOutForm = ({ selectClass }) => {
                 status: 'service pending',
                 itemName: selectClass.className,
             }
-            axiosSecure.post(`/payments/${selectClass._id}`, payment, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
-            })
+            // axiosSecure.post(`/payments/${selectClass._id}`, payment, {
+            //     headers: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
+            // })
+            axiosSecure.post(`/payments/${selectClass._id}`, payment)
                 .then(res => {
                     navigate('/dashboard/paymentHistory')
                     console.log(res.data);
-                    // if (res.data.result.insertedId) {
-                    //     // display confirm
-                    // }
+                    if (res.data.insertResult.insertedId) {
+                        // display confirm
+                    }
                 })
         }
 
