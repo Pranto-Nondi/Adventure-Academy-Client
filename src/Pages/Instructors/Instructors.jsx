@@ -1,45 +1,56 @@
+import React from "react";
+import usePopularInstructors from "../../hooks/usePopularInstructors";
 
-import usePopularInstructors from '../../hooks/usePopularInstructors';
-import { RotatingLines } from 'react-loader-spinner';
+
+
 const Instructors = () => {
-
-    const [instructors, loading] = usePopularInstructors();
-   
-    if ( loading) {
-        return (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-                <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="96" visible={true} />
-            </div>
-        );
-    }
+    const [instructors] = usePopularInstructors()
+    console.log(instructors)
 
     return (
-        <div className="overflow-x-auto pb-10">
-            <p className="text-center text-2xl pt-5">All Instructors List</p>
-            <br />
-            <table className="table w-full">
-                {/* head */}
-                <thead>
-                    <tr>
-                        <th className="px-4 py-2">#</th>
-                        <th className="px-4 py-2">Name</th>
-                        <th className="px-4 py-2">Image</th>
-                        <th className="px-4 py-2">Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {instructors.map((instructor, index) => (
-                        <tr key={instructor._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                            <td className="px-4 py-2">{index + 1}</td>
-                            <td className="px-4 py-2">{instructor.name}</td>
-                            <td className="px-4 py-2">Not Available</td>
-                            <td className="px-4 py-2">Not Available</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="container mx-auto my-10">
+            <h2 className="text-3xl font-bold mb-6">Popular Instructor</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {instructors?.slice(0,6).map((instructor) => (
+                    <div
+                        key={instructor._id}
+                        className="card card-compact w-96 bg-base-100 shadow-xl"
+                    >
+                        <figure>
+                            <img className="w-[60%] h-56" src={instructor?.image} alt={instructor.image} />
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title">Name: {instructor.instructorName}</h2>
+                            <p className="card-title text-lg"> Email: {instructor.instructorEmail}$</p>
+                            <div className="card-actions justify-start">
+                                <button className="btn bg-emerald-100">View Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
+        // <div className="container mx-auto my-10">
+        //     <h2 className="text-3xl font-bold mb-6">Popular Instructor</h2>
+        //     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        //         {instructors?.map((instructor) => (
+        //             <div key={instructor._id} className="card card-compact bg-base-100 shadow-xl">
+        //                 <figure className="flex justify-center items-center">
+        //                     <img className="w-[60%] h-56 object-cover" src={instructor?.image} alt={instructor.image} />
+        //                 </figure>
+        //                 <div className="card-body">
+        //                     <h2 className="card-title">Name: {instructor.instructorName}</h2>
+        //                     <p className="card-title text-lg">Email: {instructor.instructorEmail}</p>
+        //                     <div className="card-actions justify-start">
+        //                         <button className="btn bg-emerald-100">View Profile</button>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         ))}
+        //     </div>
+        // </div>
     );
 };
 
 export default Instructors;
+

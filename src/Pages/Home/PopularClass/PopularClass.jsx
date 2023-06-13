@@ -3,7 +3,7 @@ import usePopularClass from "../../../hooks/usePopularClass";
 
 const PopularClasses = () => {
     const [classes] = usePopularClass()
-    // console.log(classes)
+
 
     return (
         <div className="container mx-auto my-10">
@@ -15,13 +15,13 @@ const PopularClasses = () => {
                         className="card card-compact w-96 bg-base-100 shadow-xl"
                     >
                         <figure>
-                            <img src="https://media.istockphoto.com/id/1395305908/photo/group-of-children-and-teacher-playing-with-rainbow-playground-parachute-on-green-grass-summer.jpg?s=612x612&w=0&k=20&c=eEaYgcasw-oEmyu0VdGxKp2JpzVJWWO6eEQ6SAGWKEU=" alt={classItem.title} />
+                            <img src={classItem?.imgURL} alt={classItem.title} />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title"> {classItem.name}</h2>
-                            <p>{classItem.description}</p>
+                            <h2 className="card-title"> {classItem.className}</h2>
+                            <p className="text-lg">Price: {classItem.price}$</p>
                             <div className="card-actions justify-start">
-                                <button className="btn bg-emerald-100">Learn More</button>
+                                <button className="btn bg-emerald-100">Add to Cart</button>
                             </div>
                         </div>
                     </div>

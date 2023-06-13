@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const AddClass = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -29,7 +30,27 @@ const AddClass = () => {
             price: parseFloat(price),
             status: "pending"
         };
+        const instructor = {
+            instructorName: user.displayName,
+            instructorEmail: user.email,
+            image: user?.photoURL,
 
+        };
+        axios.post('http://localhost:5000/instructors', instructor, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                const data = response.data;
+                if (data.insertedId) {
+                    refetch();
+
+                }
+            })
+            .catch(error => {
+                // Handle the error here
+            });
         try {
             const classResponse = await axiosSecure.post("/class", newItem);
             console.log(classResponse)
