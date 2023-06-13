@@ -10,8 +10,8 @@ const MyClasses = () => {
     const [axiosSecure] = useAxiosSecure();
     const { user } = useAuth();
 
-    const  myClasses = classes.filter(item => item.classes === user.email);
-
+    const  myClasses = classes.filter(item => item.instructorEmail == user?.email);
+    console.log(myClasses)
 
     return (
         <div className="w-full max-h-full pt-10 pl-5">
