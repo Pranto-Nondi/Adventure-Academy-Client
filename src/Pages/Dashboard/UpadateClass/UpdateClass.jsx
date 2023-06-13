@@ -31,27 +31,7 @@ const UpdateClass = () => {
             price: parseFloat(price),
             status: "pending"
         };
-        const instructor = {
-            instructorName: user.displayName,
-            instructorEmail: user.email,
-            image: user?.photoURL,
-
-        };
-        axios.post('http://localhost:5000/instructors', instructor, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                const data = response.data;
-                if (data.insertedId) {
-                    refetch();
-
-                }
-            })
-            .catch(error => {
-                // Handle the error here
-            });
+       
         try {
             const classResponse = await axiosSecure.patch(`/class/${id}`, updatedClass);
             console.log(classResponse);
