@@ -12,15 +12,16 @@ import useSelectedClasses from '../../hooks/useSelectedClasses';
 
 const Classes = () => {
     const [isAdmin] = useAdmin();
+    console.log(isAdmin)
     const [isInstructor] = useInstructor();
     const { user } = useAuth();
-    const [allClasses, , ] = usePopularClass();
+    const [allClasses, ,] = usePopularClass();
     const location = useLocation();
     const navigate = useNavigate();
-    const [selectedClasses,refetch] = useSelectedClasses()
+    const [selectedClasses, refetch] = useSelectedClasses()
     const [isLoading, setIsLoading] = useState(true);
     // const [selectedClasses, setSelectedClasses] = useState([]);
-   
+
     const classes = allClasses.filter((classe) => classe.status === 'approved');
 
     // useEffect(() => {
@@ -43,9 +44,10 @@ const Classes = () => {
     // };
 
     const handleSelectCourse = (classe) => {
-        const { _id, className, imgURL, instructorName, instructorEmail, availableSeats, price, status } = classe;
-
         if (user && user.email) {
+            const { _id, className, imgURL, instructorName, instructorEmail, availableSeats, price, status } = classe;
+
+
             const classData = {
                 classId: _id,
                 className,
@@ -94,6 +96,9 @@ const Classes = () => {
                         text: 'Failed to select the class.',
                     });
                 });
+
+
+
         } else {
             Swal.fire({
                 title: 'Please login to select the class',
@@ -111,7 +116,8 @@ const Classes = () => {
     };
 
     const isClassSelected = (classe) => {
-        return selectedClasses?.some((selectedClass) => selectedClass.classId === classe._id);
+        if (classe.email)
+            return selectedClasses?.some((selectedClass) => selectedClass.classId === classe._id);
     };
 
     return (
@@ -130,7 +136,9 @@ const Classes = () => {
                                 <p className="card-title text-lg">Available seats: {classe.availableSeats}</p>
                                 <p className="card-title text-md">Price: {classe.price}$</p>
                                 <div className="card-actions">
-                                    {isClassSelected(classe) ? (
+                                    {isAdmin || isInstructor ? (<button className="btn bg-red-500" disabled >
+                                        select
+                                    </button>) : (isClassSelected(classe)) ? (
                                         <button className="btn bg-green-500" >
                                             Selected
                                         </button>
@@ -139,6 +147,7 @@ const Classes = () => {
                                             Select
                                         </button>
                                     )}
+
                                 </div>
                             </div>
                         </div>
