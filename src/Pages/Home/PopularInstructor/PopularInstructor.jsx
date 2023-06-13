@@ -15,11 +15,11 @@ const PopularInstructor = () => {
                 {instructors.slice(0, 6).map((instructor, index) => (
                     <div key={index} className="card w-96 bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10 ">
-                            <img  src={instructor.image} alt={instructor.image} className="rounded-xl w-[80%] h-60 " />
+                            <img src={instructor.image} alt={instructor.image} className="rounded-xl w-[80%] h-60 " />
                         </figure>
                         <div className="card-body items-center text-center">
                             <h2 className="card-title">{instructor.instructorName}</h2>
-                            
+
                             <div className="card-actions">
                                 <button className="btn bg-emerald-200">View profile</button>
                             </div>

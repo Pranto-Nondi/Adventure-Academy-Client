@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import usePopularClass from '../../../hooks/usePopularClass';
+import { Link } from 'react-router-dom';
 
 const MyClasses = () => {
     const [classes, loading, refetch] = usePopularClass();
@@ -58,22 +59,14 @@ const MyClasses = () => {
                                         <button className='btn btn-xs bg-red-300' >Denied</button>
                                     )}
                                 </td>
-                                {/* <td>
-                                    {classItem?.status === 'pending' && (
-                                        <button className='btn btn-xs btn-info' onClick={() => handleApprove(classItem._id)}>Approve</button>
-                                    )}
-                                </td>
+
                                 <td>
-                                    {classItem?.status === 'pending' && (
-                                        <button className='btn btn-xs btn-warning' onClick={() => handleDeny(classItem._id)}>Deny</button>
-                                    )}
-                                </td> */}
+                                    <Link to={`/dashboard/updateClass/${classItem._id}`}><button className="btn btn-info btn-xs">Update</button></Link>
+                                </td>
                                 <td>
                                     <button className="btn btn-primary btn-xs">FeedBack</button>
                                 </td>
-                                <td>
-                                    <button className="btn btn-info btn-xs">Update</button>
-                                </td>
+
                             </tr>
                         ))}
                     </tbody>
