@@ -60,7 +60,7 @@ const PaymentHistory = () => {
                                 <tr key={payment._id}>
                                     <td>{index + 1}</td>
                                     <td>{formatDate(payment.date)}</td>
-                                    <td className="text-end">{payment.price}</td>
+                                    <td className="text-end">{payment.price}$</td>
                                     <td>{payment.itemName}</td>
                                     <td>{payment.transactionId}</td>
                                     {/* Render other payment fields */}

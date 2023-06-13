@@ -136,7 +136,7 @@ const Classes = () => {
                                 <p className="card-title text-lg">Available seats: {classe.availableSeats}</p>
                                 <p className="card-title text-md">Price: {classe.price}$</p>
                                 <div className="card-actions">
-                                    {isAdmin || isInstructor ? (<button className="btn bg-red-500" disabled >
+                                    {isAdmin || isInstructor || classe?.availableSeats===0 ? (<button className="btn bg-red-500" disabled >
                                         select
                                     </button>) : (isClassSelected(classe)) ? (
                                         <button className="btn bg-green-500" >
