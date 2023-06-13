@@ -26,7 +26,7 @@ const MyClasses = () => {
                             <th>Price</th>
                             <th>Status</th>
                             <th>Info</th>
-                            <th>Action</th>
+                            <th>FeedBack</th>
 
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@ const MyClasses = () => {
                                     <Link to={`/dashboard/updateClass/${classItem._id}`}><button className="btn btn-info btn-xs">Update</button></Link>
                                 </td>
                                 <td>
-                                    <button className="btn btn-primary btn-xs">FeedBack</button>
+                                    <p className=" font-semibold ">Not Available</p>
                                 </td>
 
                             </tr>
