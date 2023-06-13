@@ -8,13 +8,13 @@ const usePopularClass = () => {
             const data = await res.json();
 
             // Sort classes based on the number of students in descending order
-            const sortedClasses = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
+            // const sortedClasses = data.sort((a, b) => b.numberOfStudents - a.numberOfStudents);
             // console.log(sortedClasses)
 
             // Limit the classes to 6
             // const limitedClasses = sortedClasses.slice(0, 6);
 
-            return sortedClasses;
+            return data;
         }
     });
 

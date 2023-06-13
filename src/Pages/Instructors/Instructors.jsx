@@ -11,7 +11,7 @@ const Instructors = () => {
         <div className="container mx-auto my-10">
             <h2 className="text-3xl font-bold mb-6">Top Instructor</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {instructors?.slice(0,6).map((instructor) => (
+                {instructors?.map((instructor) => (
                     <div
                         key={instructor._id}
                         className="card card-compact w-96 bg-base-100 shadow-xl"
