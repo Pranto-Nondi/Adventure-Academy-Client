@@ -31,7 +31,7 @@ const Classes = () => {
     // }, [user]);
 
     // const fetchSelectedClasses = (email) => {
-    //     fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses?email=${email}`)
+    //     fetch(`http://localhost:5000/selectedClasses?email=${email}`)
     //         .then((res) => res.json())
     //         .then((data) => {
     //             if (data.success) {
@@ -60,7 +60,7 @@ const Classes = () => {
                 email: user.email,
             };
 
-            fetch('https://summer-camp-phograpy-school-server.vercel.app/selectClasses', {
+            fetch('http://localhost:5000/selectClasses', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -123,7 +123,7 @@ const Classes = () => {
     return (
         <>
             <section className="p-4">
-                <h2 className="text-2xl font-bold mb-4">Popular Instructors</h2>
+                <h2 className="text-3xl font-bold  mb-4">Top Classes</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {classes.map((classe, index) => (
                         <div key={index} className="card w-96 bg-base-100 shadow-xl">

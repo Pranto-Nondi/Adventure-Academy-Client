@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import usePopularClass from '../../../hooks/usePopularClass';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const MyClasses = () => {
     const [classes, loading, refetch] = usePopularClass();
     const [axiosSecure] = useAxiosSecure();
+    const { user } = useAuth();
 
-
+    const  myClasses = classes.filter(item => item.classes === user.email);
 
 
     return (
@@ -31,7 +33,7 @@ const MyClasses = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {classes.map((classItem, index) => (
+                        {myClasses.map((classItem, index) => (
                             <tr key={classItem._id}>
                                 <td>{index + 1}</td>
                                 <td>

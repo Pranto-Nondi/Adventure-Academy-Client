@@ -4,8 +4,10 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
-import Swal from 'sweetalert2';
+
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import useAuth from '../../hooks/useAuth';
+import swal from 'sweetalert';
 
 
 const SignUp = () => {
@@ -16,7 +18,7 @@ const SignUp = () => {
         watch,
         reset
     } = useForm();
-    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut } = useAuth();
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +38,7 @@ const SignUp = () => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         const saveUser = { name: data.name, email: data.email }
-                        fetch('https://summer-camp-phograpy-school-server.vercel.app/users', {
+                        fetch('http://localhost:5000/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -47,6 +49,8 @@ const SignUp = () => {
                             .then(data => {
                                 if (data.insertedId) {
                                     reset();
+                                    navigate(`/`)
+                                    swal("Good job!", "Account  Created  SuccessFull", "success")
 
                                 }
                             })
@@ -54,15 +58,15 @@ const SignUp = () => {
                     })
                     .catch(error => console.log(error))
 
-                    logOut()
-                    .then(() => {
+                // logOut()
+                //     .then(() => {
 
-                        navigate(`/login`)
+                //         navigate(`/login`)
 
-                    })
-                    .catch(error => {
-                        setError(error.message)
-                    })
+                //     })
+                //     .catch(error => {
+                //         setError(error.message)
+                //     })
             })
             .catch(error => console.log(error))
     };
