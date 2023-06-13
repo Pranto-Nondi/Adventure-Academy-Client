@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 const CheckOutForm = ({ selectClass }) => {
     const { price } = selectClass || [];
@@ -101,11 +102,12 @@ const CheckOutForm = ({ selectClass }) => {
 
             axiosSecure.post(`/payments/${selectClass._id}`, payment)
                 .then(res => {
+                    swal("Good job!", "Payment SuccessFull", "success")
                     navigate('/dashboard/paymentHistory');
 
                     if (res.data.insertResult.insertedId) {
                         // Send a request to update the class availableSeats
-                        axios.put(`http://localhost:5000/classes/${selectClass.classId}`)
+                        axios.put(`https://summer-camp-phograpy-school-server.vercel.app/classes/${selectClass.classId}`)
                             .then(res => {
                                 console.log(res.data); // Updated class data from the server
                             })

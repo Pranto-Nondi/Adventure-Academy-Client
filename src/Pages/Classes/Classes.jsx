@@ -31,7 +31,7 @@ const Classes = () => {
     // }, [user]);
 
     // const fetchSelectedClasses = (email) => {
-    //     fetch(`http://localhost:5000/selectedClasses?email=${email}`)
+    //     fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses?email=${email}`)
     //         .then((res) => res.json())
     //         .then((data) => {
     //             if (data.success) {
@@ -60,7 +60,7 @@ const Classes = () => {
                 email: user.email,
             };
 
-            fetch('http://localhost:5000/selectClasses', {
+            fetch('https://summer-camp-phograpy-school-server.vercel.app/selectClasses', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
