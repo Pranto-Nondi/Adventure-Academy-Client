@@ -99,56 +99,48 @@ const SelectedClasses = () => {
 
     return (
         <>
-            {
-                selectedClasses.length === 0 ? (
-                    <div className='container mx-auto mt-10 pt-10'>
-                        <h1 className='text-center text-3xl mt-10 pt-10 '>You Have no Selected Class</h1>
-                    </div>
-                ) : (<div>
-                    <div className="overflow-x-auto pt-5">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Img</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Pay</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {selectedClasses?.map((selectClass, index) => (
-                                    <tr key={selectClass._id}>
-                                        <th>{index + 1}</th>
-                                        <td>
-                                            <div className="flex items-center space-x-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <img src={selectClass?.imgURL} alt="Avatar Tailwind CSS Component" />
-                                                    </div>
+            <div>
+                <div className="overflow-x-auto pt-5">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Img</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Pay</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {selectedClasses?.map((selectClass, index) => (
+                                <tr key={selectClass._id}>
+                                    <th>{index + 1}</th>
+                                    <td>
+                                        <div className="flex items-center space-x-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    <img src={selectClass?.imgURL} alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>{selectClass.className}</td>
-                                        <td>{selectClass.price}</td>
-                                        <td>
-                                            <Link to={`/dashboard/payment?id=${selectClass._id}`}><button className="btn btn-success btn-sm">Buy</button></Link>
+                                        </div>
+                                    </td>
+                                    <td>{selectClass.className}</td>
+                                    <td>{selectClass.price}</td>
+                                    <td>
+                                        <Link to={`/dashboard/payment?id=${selectClass._id}`}><button className="btn btn-success btn-sm">Buy</button></Link>
 
-                                        </td>
-                                        <td>
-                                            <button onClick={() => handleDelete(selectClass)} className="btn btn-error btn-sm">Delete</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(selectClass)} className="btn btn-error btn-sm">Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                )
-            }
-
+            </div>
         </>
     );
 };

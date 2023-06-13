@@ -93,9 +93,12 @@ const CheckOutForm = ({ selectClass }) => {
                 classItem: selectClass.classId,
                 status: 'service pending',
                 itemName: selectClass.className,
+                image: selectClass.imgURL,
+                instructorName: selectClass.instructorName,
+
             }
 
-            
+
             axiosSecure.post(`/payments/${selectClass._id}`, payment)
                 .then(res => {
                     navigate('/dashboard/paymentHistory');
