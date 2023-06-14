@@ -49,7 +49,7 @@ const MyClasses = () => {
                                 <td>{classItem?.instructorName}</td>
                                 <td>{classItem?.instructorEmail}</td>
                                 <td>{classItem?.availableSeats}</td>
-                                <td>{classItem?.price}</td>
+                                <td>{classItem?.price}$</td>
                                 <td>
                                     {classItem?.status === 'pending' && (
                                         <button className='btn btn-xs bg-yellow-200'>Pending</button>

@@ -127,7 +127,7 @@ const SelectedClasses = () => {
                                         </div>
                                     </td>
                                     <td>{selectClass.className}</td>
-                                    <td>{selectClass.price}</td>
+                                    <td>{selectClass.price}$</td>
                                     <td>
                                         <Link to={`/dashboard/payment?id=${selectClass._id}`}><button className="btn btn-success btn-sm">Buy</button></Link>
 
