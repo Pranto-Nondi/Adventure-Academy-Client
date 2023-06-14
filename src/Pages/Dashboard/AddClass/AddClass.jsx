@@ -36,7 +36,7 @@ const AddClass = () => {
             image: user?.photoURL,
 
         };
-        axios.post('http://localhost:5000/instructors', instructor, {
+        axios.post('https://summer-camp-phograpy-school-server.vercel.app/instructors', instructor, {
             headers: {
                 'Content-Type': 'application/json'
             }

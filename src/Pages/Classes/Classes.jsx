@@ -24,24 +24,7 @@ const Classes = () => {
 
     const classes = allClasses.filter((classe) => classe.status === 'approved');
 
-    // useEffect(() => {
-    //     if (user && user.email) {
-    //         fetchSelectedClasses(user.email);
-    //     }
-    // }, [user]);
-
-    // const fetchSelectedClasses = (email) => {
-    //     fetch(`http://localhost:5000/selectedClasses?email=${email}`)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             if (data.success) {
-    //                 setSelectedClasses(data.data);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error occurred while fetching selected classes:', error);
-    //         });
-    // };
+    
 
     const handleSelectCourse = (classe) => {
         if (user && user.email) {
@@ -60,7 +43,7 @@ const Classes = () => {
                 email: user.email,
             };
 
-            fetch('http://localhost:5000/selectClasses', {
+            fetch('https://summer-camp-phograpy-school-server.vercel.app/selectClasses', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -122,7 +105,7 @@ const Classes = () => {
 
     return (
         <>
-            <section className="p-4">
+            <section className="p-4 pb-10">
                 <h2 className="text-3xl font-bold  mb-4">Top Classes</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {classes.map((classe, index) => (

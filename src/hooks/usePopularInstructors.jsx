@@ -4,7 +4,7 @@ const usePopularInstructors = () => {
     const { data: instructors = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['menu'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/instructors');
+            const res = await fetch('https://summer-camp-phograpy-school-server.vercel.app/instructors');
             const data = await res.json();
 
             // Sort classes based on the number of students in descending order
