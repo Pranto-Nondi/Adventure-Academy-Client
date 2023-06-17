@@ -62,7 +62,7 @@ const Slider = () => {
                 <div className="carousel w-full h-[600px]" ref={carouselRef}>
                     <div id="slide1" className="carousel-item relative w-full active">
                         <img
-                            src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VtbWVyJTIwY2FtcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                            src="https://i.ibb.co/C9SYk1k/s2.jpg"
                             className="w-full"
                             alt="Slide 1"
                         />
@@ -88,7 +88,7 @@ const Slider = () => {
                     </div>
                     <div id="slide2" className="carousel-item relative w-full">
                         <img
-                            src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VtbWVyJTIwY2FtcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                            src="https://i.ibb.co/Gp54qPp/p.jpg"
                             className="w-full"
                             alt="Slide 2"
                         />
@@ -114,7 +114,7 @@ const Slider = () => {
                     </div>
                     <div id="slide3" className="carousel-item relative w-full">
                         <img
-                            src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VtbWVyJTIwY2FtcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                            src="https://i.ibb.co/N3TPCDg/s3.jpg"
                             className="w-full"
                             alt="Slide 3"
                         />
@@ -140,7 +140,7 @@ const Slider = () => {
                     </div>
                     <div id="slide4" className="carousel-item relative w-full">
                         <img
-                            src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VtbWVyJTIwY2FtcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                            src="https://i.ibb.co/0JMGCXP/s4.jpg"
                             className="w-full"
                             alt="Slide 4"
                         />
