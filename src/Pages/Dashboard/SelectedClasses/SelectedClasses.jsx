@@ -17,7 +17,7 @@ const SelectedClasses = () => {
     //     const fetchSelectedClasses = async () => {
     //         try {
     //             if (user && user.email) {
-    //                 const response = await fetch(`http://localhost:5000/selectedClasses?email=${user?.email}`);
+    //                 const response = await fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses?email=${user?.email}`);
     //                 const data = await response.json();
     //                 if (data.success) {
     //                     setSelectedClasses(data.data);
@@ -43,7 +43,7 @@ const SelectedClasses = () => {
     //         confirmButtonText: 'Yes, delete it!'
     //     }).then((result) => {
     //         if (result.isConfirmed) {
-    //             fetch(`http://localhost:5000/selectedClasses/${selectClass._id}`, {
+    //             fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses/${selectClass._id}`, {
     //                 method: 'DELETE'
     //             })
     //                 .then(res => res.json())
