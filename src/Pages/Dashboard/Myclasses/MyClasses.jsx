@@ -66,7 +66,7 @@ const MyClasses = () => {
                                     <Link to={`/dashboard/updateClass/${classItem._id}`}><button className="btn btn-info btn-xs">Update</button></Link>
                                 </td>
                                 <td>
-                                    <p className=" font-semibold ">Not Available</p>
+                                    <p className=" font-semibold ">{classItem.feedback}</p>
                                 </td>
 
                             </tr>
