@@ -1,16 +1,21 @@
-
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import swal from "sweetalert";
 import useInstructor from "../../../hooks/useInstructor";
 import useAdmin from "../../../hooks/useAdmin";
+import DarkModeToggle from "../../../DarkMoodToggle/DarkMoodToggle";
+
+
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const navigate = useNavigate()
+
+
+
     const handleLogOut = () => {
         logOut()
             .then(() => {
@@ -49,6 +54,7 @@ const NavBar = () => {
         }
     }
 
+
     return (
         <div className="sticky top-0 z-10 bg-neutral text-neutral-content">
             <div className="navbar mx-auto  ">
@@ -86,6 +92,8 @@ const NavBar = () => {
                             />
                         </div>
                     </label>
+                    <DarkModeToggle />
+
                 </div>
             </div>
         </div>
@@ -93,3 +101,5 @@ const NavBar = () => {
 }
 
 export default NavBar;
+
+

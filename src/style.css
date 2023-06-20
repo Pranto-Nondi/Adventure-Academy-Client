@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #ffffff;
+    --background-color: #f1f1f1;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+/* Add additional styles for the dark theme */
+.dark-mode {
+    --primary-color: #ffffff;
+    --background-color: #1f1f1f;
+}

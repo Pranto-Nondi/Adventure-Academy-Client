@@ -1,3 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Dark theme styles */
+.dark {
+    @apply bg-black text-gray-500 opacity-90 bg-opacity-100;
+}
+
+/* Light theme styles */
+.light {
+    @apply bg-white text-black;
+}
+
