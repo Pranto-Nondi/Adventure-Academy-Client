@@ -92,7 +92,7 @@ const NavBar = () => {
                             />
                         </div>
                     </label>
-                    <DarkModeToggle />
+                    {/* <DarkModeToggle /> */}
 
                 </div>
             </div>
