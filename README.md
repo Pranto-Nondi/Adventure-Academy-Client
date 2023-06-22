@@ -1,6 +1,6 @@
-# CampSnap Photography Site
+# Adventure Summer Camp Academy Site
 
-This Website is a Summer Camp Photography school  website with client and server-side implementation using MongoDB as the database.
+This Website is a Adventure Summer Camp Academy  website with client and server-side implementation using MongoDB as the database.
 
 ## Live Link
 
