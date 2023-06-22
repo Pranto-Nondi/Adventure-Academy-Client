@@ -9,9 +9,9 @@ const Footer = () => {
             <div className="container mx-auto py-10 px-4 md:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     <div className="col-span-1 md:col-span-2 lg:col-span-1">
-                        <h2 className="text-2xl font-bold mb-4">Summer Camp Photography School</h2>
+                        <h2 className="text-2xl font-bold mb-4">Adventure Academy summer Camp </h2>
                         <p className="text-gray-300 mb-4">
-                            Capture the beauty of the world through the lens at our Summer Camp Photography School. Join us for an unforgettable experience .
+                            Capture the beauty of the world through the lens at our Adventure Academy summer Camp.Join us for an unforgettable experience.
 
                         </p>
                         <div className="flex items-center space-x-4">
@@ -124,7 +124,7 @@ const Footer = () => {
                 <hr className="my-8 border-gray-700" />
                 <div className="flex items-center justify-between">
                     <p className="text-sm text-gray-300">
-                        &copy; {new Date().getFullYear()} Summer Camp Photography School. All rights reserved.
+                        &copy; {new Date().getFullYear()} Adventure Academy summer Camp. All rights reserved.
                     </p>
                     <div className="flex space-x-4">
                         <a href="#" className="text-gray-300 hover:text-indigo-500">

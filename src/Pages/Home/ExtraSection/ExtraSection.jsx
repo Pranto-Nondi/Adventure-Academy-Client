@@ -7,7 +7,7 @@ const ExtraSection = () => {
     return (
         <section className="bg-gray-100 py-20 flex items-center ">
             <div className="container mx-auto flex flex-col items-center justify-center align-middle ">
-                <h2 className="text-4xl font-bold mb-10">Capture Memories at Our Summer Camp</h2>
+                <h2 className="text-4xl font-bold mb-10">Capture Memories at  Adventure Summer Camp Academy</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 container mx-auto p-5  ">
                     <div className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300">
                         <svg className="w-10 h-10 text-indigo-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

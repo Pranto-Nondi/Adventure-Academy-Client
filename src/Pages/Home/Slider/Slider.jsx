@@ -67,7 +67,7 @@ const Slider = () => {
                         <div className="absolute flex justify-center items-center top-0 left-0 w-full h-full bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                             <div className="space-y-8 text-center">
                                 <h1 className="text-6xl text-center text-white font-semibold">
-                                    Join the Summer Camp Photography School
+                                    Join the  Adventure Summer Camp Academy
                                 </h1>
                                 <p className="text-2xl text-white font-semibold">
                                     Discover the art of photography and capture the world through your lens
@@ -119,7 +119,7 @@ const Slider = () => {
                         <div className="absolute flex justify-center items-center top-0 left-0 w-full h-full bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
                             <div className="space-y-8 text-center">
                                 <h1 className="text-6xl text-white font-semibold">
-                                    Capture Beautiful Moments at Summer Camp
+                                    Capture Beautiful Moments at Adventure Summer Camp Academy
                                 </h1>
                                 <p className="text-2xl text-white font-semibold">
                                     Join us for an unforgettable experience and document memories that last a lifetime

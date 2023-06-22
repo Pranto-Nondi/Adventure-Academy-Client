@@ -71,7 +71,7 @@ const NavBar = () => {
                             {renderAuthOptions()}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">CampSnapPhotography</a>
+                   <Link to='/'> <p className="btn btn-ghost normal-case text-xl">Adventure Academy</p></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
