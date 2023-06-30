@@ -9,57 +9,11 @@ import { Link } from 'react-router-dom';
 
 const SelectedClasses = () => {
     const { user, loading, setSelectClass } = useAuth();
-    // const [selectedClasses, setSelectedClasses] = useState([]);
+
     const [selectedClasses, refetch] = useSelectedClasses()
     const [axiosSecure] = useAxiosSecure();
 
-    // useEffect(() => {
-    //     const fetchSelectedClasses = async () => {
-    //         try {
-    //             if (user && user.email) {
-    //                 const response = await fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses?email=${user?.email}`);
-    //                 const data = await response.json();
-    //                 if (data.success) {
-    //                     setSelectedClasses(data.data);
-    //                 }
-    //             }
-    //         } catch (error) {
-    //             console.error('Error occurred while fetching selected classes:', error);
-    //         }
-    //     };
-
-    //     if (user && user.email) {
-    //         fetchSelectedClasses();
-    //     }
-    // }, [user]);
-    // const handleDelete = selectClass => {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You want to delete !",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             fetch(`https://summer-camp-phograpy-school-server.vercel.app/selectedClasses/${selectClass._id}`, {
-    //                 method: 'DELETE'
-    //             })
-    //                 .then(res => res.json())
-    //                 .then(data => {
-    //                     if (data.deletedCount > 0) {
-    //                         refetch();
-    //                         Swal.fire(
-    //                             'Deleted!',
-    //                             'Your Class has been deleted.',
-    //                             'success'
-    //                         )
-    //                     }
-    //                 })
-    //         }
-    //     })
-    // }
+  
     const handleDelete = selectClass => {
         Swal.fire({
             title: 'Are you sure?',

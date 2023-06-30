@@ -15,7 +15,7 @@ const Dashboard = () => {
     return (
         <>
             <NavBar />
-            <div className="flex h-screen ">
+            <div className="flex min-h-screen ">
                 <div className="w-1/4 bg-gray-200 pt-5 ">
                     <div className="p-5">
                         <ul className="space-y-10">
@@ -134,8 +134,6 @@ const Dashboard = () => {
                             <li>
                                 <NavLink
                                     to="/"
-
-
                                     className="flex items-center space-x-2 "
                                 >
                                     <FaHome />
@@ -145,7 +143,7 @@ const Dashboard = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="w-3/4 bg-white">
+                <div className=" w-3/4 bg-white">
                     <Outlet />
 
                 </div>
@@ -157,3 +155,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+// w-3/4
