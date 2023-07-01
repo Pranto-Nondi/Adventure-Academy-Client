@@ -96,6 +96,7 @@ const CheckOutForm = ({ selectClass }) => {
                 itemName: selectClass.className,
                 image: selectClass.imgURL,
                 instructorName: selectClass.instructorName,
+               
 
             }
 
@@ -107,7 +108,7 @@ const CheckOutForm = ({ selectClass }) => {
 
                     if (res.data.insertResult.insertedId) {
                         // Send a request to update the class availableSeats
-                        axios.put(`https://summer-camp-phograpy-school-server.vercel.app/classes/${selectClass.classId}`)
+                        axios.put(`http://localhost:5000/classes/${selectClass.classId}`)
                             .then(res => {
                                 console.log(res.data); // Updated class data from the server
                             })

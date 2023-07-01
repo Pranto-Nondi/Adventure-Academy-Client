@@ -4,7 +4,7 @@ const usePopularClass = () => {
     const { data: classes = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch('https://summer-camp-phograpy-school-server.vercel.app/classes');
+            const res = await fetch('http://localhost:5000/classes');
             const data = await res.json();
 
             // Sort classes based on the number of students in descending order
@@ -13,7 +13,7 @@ const usePopularClass = () => {
 
             // Limit the classes to 6
             // const limitedClasses = sortedClasses.slice(0, 6);
-
+            console.log(data)
             return data;
         }
     });
